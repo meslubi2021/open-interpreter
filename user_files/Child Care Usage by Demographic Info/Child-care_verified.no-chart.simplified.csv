@@ -1,0 +1,55 @@
+index,"Center based child care usage for children under the age of 5 years living with mother by sex and race/ethnicity of child, selected years 2005–2011",Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8
+0,Characteristic,2005,,2006,,2010,,Spring 2011,
+1,,Number (in thousands),Percent,Number (in thousands),Percent,Number (in thousands),Percent,Number (in thousands),Percent
+2,Total ,19633,23.3,19112,24.3,19978,23.4,19839,23.7
+3,Sex ,,,,,,,,
+4,Male,10036,23.1,9777,22.61,10195,24.13,10186,24.4
+5,Female,9599,23.6,9336,23.05,9784,22.69,9655,22.9
+6,Race/ethnicity,,,,,,,,
+7,"White alone, non-Hispanic",11152,24.1,10782,23.76,10578,25.27,10693,24.2
+8,"Black alone, non-Hispanic ",2813,31.0,2683,25.87,2705,27.72,2679,31.8
+9,Hispanic,4227,15.6,4125,18.33,4943,16.27,4737,16.8
+10,"Asian alone, non-Hispanic",637,23.6,699,23.6,785,21.91,790,30.0
+11,"Other alone, non-Hispanic",804,26.9,823,22.45,966,29.15,940,23.6
+12,Males,,,,,,,,
+13,"White alone, non-Hispanic",5727,24.4,5544,23.44,5481,25.64,5539,24.5
+14,"Black alone, non-Hispanic ",1428,27.7,1349,24.97,1363,28.13,1356,33.8
+15,Hispanic,2151,15.0,2110,18.1,2474,18.32,2435,16.8
+16,"Asian alone, non-Hispanic",323,24.2,320,24.95,378,29.68,367,39.0
+17,"Other alone, non-Hispanic",407,29.8,454,24.65,499,32.3,489,23.7
+18,Females,,,,,,,,
+19,"White alone, non-Hispanic",5425,23.7,5239,24.1,5097,25.94,5155,23.9
+20,"Black alone, non-Hispanic ",1385,34.3,1334,26.78,1342,27.31,1323,29.7
+21,Hispanic,2077,16.1,2015,18.57,2470,14.21,2302,16.8
+22,"Asian alone, non-Hispanic",314,22.9,379,22.46,407,14.68,424,22.3
+23,"Other alone, non-Hispanic",398,24.0,369,19.74,468,25.77,451,23.4
+24,"NOTE: Center based child care includes day care centers, nursery or preschools, federal Head Start programs, and kindergarten/grade schools. The sum of children in center based child care may exceed 100 percent because of multiple arrangements. ",,,,,,,,
+25,"SOURCE: U.S. Census Bureau, Survey of Income and Program Partcipation. ",,,,,,,,
+26,"Margins of error for center based child care usage for children under the age of 5 years living with mother by sex and race/ethnicity of child, selected years 2005–2011",,,,,,,,
+27,Characteristic,2005,,2006,,2010,,Spring 2011,
+28,,Number (in thousands),Percent margin of error1,Number (in thousands),Percent margin of error1,Number (in thousands),Percent margin of error1,Number (in thousands),Percent margin of error1
+29,Total ,—,1.1,—,1.1,—,1.1,—,1.1
+30,Sex ,,,,,,,,
+31,Male,—,1.5,—,1.6,—,1.5,—,1.5
+32,Female,—,1.5,—,1.6,—,1.5,—,1.5
+33,Race/ethnicity,,,,,,,,
+34,"White alone, non-Hispanic",—,1.4,—,1.5,—,1.5,—,1.5
+35,"Black alone, non-Hispanic ",—,3.1,—,3.1,—,3.1,—,3.2
+36,Hispanic,—,2.0,—,2.2,—,1.9,—,1.9
+37,"Asian alone, non-Hispanic",—,5.9,—,5.9,—,5.3,—,5.7
+38,"Other alone, non-Hispanic",—,5.5,—,5.4,—,5.3,—,4.9
+39,Males,,,,,,,,
+40,"White alone, non-Hispanic",—,2.0,—,2.1,—,2.1,—,2.0
+41,"Black alone, non-Hispanic ",—,4.2,—,4.3,—,4.4,—,4.5
+42,Hispanic,—,2.7,—,3.1,—,2.8,—,2.7
+43,"Asian alone, non-Hispanic",—,8.4,—,8.9,—,8.5,—,9.0
+44,"Other alone, non-Hispanic",—,8.0,—,7.5,—,7.6,—,6.8
+45,Females,,,,,,,,
+46,"White alone, non-Hispanic",—,2.0,—,2.2,—,2.2,—,2.1
+47,"Black alone, non-Hispanic ",—,4.5,—,4.5,—,4.4,—,4.4
+48,Hispanic,—,2.8,—,3.2,—,2.5,—,2.7
+49,"Asian alone, non-Hispanic",—,8.4,—,7.9,—,6.3,—,7.1
+50,"Other alone, non-Hispanic",—,7.5,—,7.6,—,7.3,—,7.0
+51,— Not available.,,,,,,,,
+52,"1 The margin of error, when added to or subtracted from the estimate, provides the 90 percent confidence interval around the estimate.  The standard error is the margin of error divided by 1.645. ",,,,,,,,
+53,"SOURCE: U.S. Census Bureau, Survey of Income and Program Partcipation. ",,,,,,,,
