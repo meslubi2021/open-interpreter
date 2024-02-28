@@ -12,7 +12,8 @@ from .languages.shell import Shell
 
 
 class Terminal:
-    def __init__(self):
+    def __init__(self, computer):
+        self.computer = computer
         self.languages = [
             Python,
             Shell,
@@ -34,6 +35,20 @@ class Terminal:
         return None
 
     def run(self, language, code, stream=False, display=False):
+        if (
+            language == "python"
+            and self.computer.import_computer_api
+            and "computer" in code
+        ):
+            if not self.computer._has_imported_computer_api:
+                self.computer._has_imported_computer_api = True
+                # Give it access to the computer via Python
+                self.computer.run(
+                    language="python",
+                    code="import time\nfrom interpreter import interpreter\ncomputer = interpreter.computer",  # We ask it to use time, so
+                    display=self.computer.verbose,
+                )
+
         if stream == False:
             # If stream == False, *pull* from _streaming_run.
             output_messages = []
@@ -56,7 +71,13 @@ class Terminal:
 
     def _streaming_run(self, language, code, display=False):
         if language not in self._active_languages:
-            self._active_languages[language] = self.get_language(language)()
+            # Get the language. Pass in self.computer *if it takes a single argument*
+            # but pass in nothing if not. This makes custom languages easier to add / understand.
+            lang_class = self.get_language(language)
+            if lang_class.__init__.__code__.co_argcount > 1:
+                self._active_languages[language] = lang_class(self.computer)
+            else:
+                self._active_languages[language] = lang_class()
         try:
             for chunk in self._active_languages[language].run(code):
                 # self.format_to_recipient can format some messages as having a certain recipient.

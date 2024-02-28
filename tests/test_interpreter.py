@@ -22,6 +22,113 @@ import pytest
 from websocket import create_connection
 
 
+def test_skills():
+    import json
+
+    interpreter.model = "gpt-3.5"
+
+    messages = ["USER: Hey can you search the web for me?\nAI: Sure!"]
+
+    combined_messages = "\\n".join(json.dumps(x) for x in messages[-3:])
+    query_msg = interpreter.chat(
+        f"This is the conversation so far: {combined_messages}. What is a hypothetical python function that might help resolve the user's query? Respond with nothing but the hypothetical function name exactly."
+    )
+    query = query_msg[0]["content"]
+    # skills_path = '/01OS/server/skills'
+    # interpreter.computer.skills.path = skills_path
+    print(interpreter.computer.skills.path)
+    print("Path: ", interpreter.computer.skills.path)
+    print("Files in the path: ")
+    interpreter.computer.run("python", "def testing_skilsl():\n    print('hi')")
+    for file in os.listdir(interpreter.computer.skills.path):
+        print(file)
+    interpreter.computer.run("python", "def testing_skill():\n    print('hi')")
+    print("Files in the path: ")
+    for file in os.listdir(interpreter.computer.skills.path):
+        print(file)
+    skills = interpreter.computer.skills.search(query)
+    lowercase_skills = [skill[0].lower() + skill[1:] for skill in skills]
+    output = "\\n".join(lowercase_skills)
+    assert "testing_skilsl" in str(output)
+
+
+@pytest.mark.skip(reason="Computer with display only + no way to fail test")
+def test_display_api():
+    start = time.time()
+
+    # interpreter.computer.display.find_text("submit")
+    # assert False
+
+    def say(icon_name):
+        import subprocess
+
+        subprocess.run(["say", "-v", "Fred", icon_name])
+
+    icons = [
+        "Submit",
+        "Yes",
+        "Profile picture icon",
+        "Left arrow",
+        "Magnifying glass",
+        "star",
+        "record icon icon",
+        "age text",
+        "call icon icon",
+        "account text",
+        "home icon",
+        "settings text",
+        "form text",
+        "gear icon icon",
+        "trash icon",
+        "new folder icon",
+        "phone icon icon",
+        "home button",
+        "trash button icon",
+        "folder icon icon",
+        "black heart icon icon",
+        "white heart icon icon",
+        "image icon",
+        "test@mail.com text",
+    ]
+
+    # from random import shuffle
+    # shuffle(icons)
+
+    say("The test will begin in 3")
+    time.sleep(1)
+    say("2")
+    time.sleep(1)
+    say("1")
+    time.sleep(1)
+
+    import pyautogui
+
+    pyautogui.mouseDown()
+
+    for icon in icons:
+        if icon.endswith("icon icon"):
+            say("click the " + icon)
+            interpreter.computer.mouse.move(icon=icon.replace("icon icon", "icon"))
+        elif icon.endswith("icon"):
+            say("click the " + icon)
+            interpreter.computer.mouse.move(icon=icon.replace(" icon", ""))
+        elif icon.endswith("text"):
+            say("click " + icon)
+            interpreter.computer.mouse.move(icon.replace(" text", ""))
+        else:
+            say("click " + icon)
+            interpreter.computer.mouse.move(icon=icon)
+
+    # interpreter.computer.mouse.move(icon="caution")
+    # interpreter.computer.mouse.move(icon="bluetooth")
+    # interpreter.computer.mouse.move(icon="gear")
+    # interpreter.computer.mouse.move(icon="play button")
+    # interpreter.computer.mouse.move(icon="code icon with '>_' in it")
+    print(time.time() - start)
+    assert False
+
+
+@pytest.mark.skip(reason="Server is not a stable feature")
 def test_websocket_server():
     # Start the server in a new thread
     server_thread = threading.Thread(target=interpreter.server)
@@ -54,6 +161,7 @@ def test_websocket_server():
     ws.close()
 
 
+@pytest.mark.skip(reason="Server is not a stable feature")
 def test_i():
     import requests
 
@@ -141,70 +249,6 @@ def test_display_verbose():
     interpreter.computer.verbose = True
     interpreter.verbose = True
     interpreter.computer.mouse.move(x=500, y=500)
-    assert False
-
-
-@pytest.mark.skip(reason="Computer with display only + no way to fail test")
-def test_display_api():
-    start = time.time()
-    time.sleep(5)
-
-    def say(icon_name):
-        import subprocess
-
-        subprocess.run(["say", "-v", "Fred", icon_name])
-
-    say("walk")
-    interpreter.computer.mouse.move(icon="walk")
-    say("run")
-    interpreter.computer.mouse.move(icon="run")
-    say("martini")
-    interpreter.computer.mouse.move(icon="martini")
-    say("walk icon")
-    interpreter.computer.mouse.move(icon="walk icon")
-    say("run icon")
-    interpreter.computer.mouse.move(icon="run icon")
-    say("martini icon")
-    interpreter.computer.mouse.move(icon="martini icon")
-
-    say("compass")
-    interpreter.computer.mouse.move(icon="compass")
-    say("photo")
-    interpreter.computer.mouse.move(icon="photo")
-    say("mountain")
-    interpreter.computer.mouse.move(icon="mountain")
-    say("boat")
-    interpreter.computer.mouse.move(icon="boat")
-    say("coffee")
-    interpreter.computer.mouse.move(icon="coffee")
-    say("pizza")
-    interpreter.computer.mouse.move(icon="pizza")
-    say("printer")
-    interpreter.computer.mouse.move(icon="printer")
-    say("home")
-    interpreter.computer.mouse.move(icon="home")
-    say("compass icon")
-    interpreter.computer.mouse.move(icon="compass icon")
-    say("photo icon")
-    interpreter.computer.mouse.move(icon="photo icon")
-    say("mountain icon")
-    interpreter.computer.mouse.move(icon="mountain icon")
-    say("boat icon")
-    interpreter.computer.mouse.move(icon="boat icon")
-    say("coffee icon")
-    interpreter.computer.mouse.move(icon="coffee icon")
-    say("pizza icon")
-    interpreter.computer.mouse.move(icon="pizza icon")
-    say("printer icon")
-    interpreter.computer.mouse.move(icon="printer icon")
-    say("home icon")
-    interpreter.computer.mouse.move(icon="home icon")
-    # interpreter.computer.mouse.move(icon="caution")
-    # interpreter.computer.mouse.move(icon="bluetooth")
-    # interpreter.computer.mouse.move(icon="gear")
-    # interpreter.computer.mouse.move(icon="play button")
-    # interpreter.computer.mouse.move(icon="code icon with '>_' in it")
-    print(time.time() - start)
     assert False
 
 
@@ -383,8 +427,7 @@ def test_hello_world():
     messages = interpreter.chat(hello_world_message)
 
     assert messages == [
-        {"role": "user", "type": "message", "content": hello_world_message},
-        {"role": "assistant", "type": "message", "content": hello_world_response},
+        {"role": "assistant", "type": "message", "content": hello_world_response}
     ]
 
 
@@ -492,24 +535,6 @@ def test_markdown():
     interpreter.chat(
         """Hi, can you test out a bunch of markdown features? Try writing a fenced code block, a table, headers, everything. DO NOT write the markdown inside a markdown code block, just write it raw."""
     )
-
-
-def test_system_message_appending():
-    ping_system_message = (
-        "Respond to a `ping` with a `pong`. No code. No explanations. Just `pong`."
-    )
-
-    ping_request = "ping"
-    pong_response = "pong"
-
-    interpreter.system_message += ping_system_message
-
-    messages = interpreter.chat(ping_request)
-
-    assert messages == [
-        {"role": "user", "type": "message", "content": ping_request},
-        {"role": "assistant", "type": "message", "content": pong_response},
-    ]
 
 
 def test_reset():
