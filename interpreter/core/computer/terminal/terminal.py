@@ -3,7 +3,7 @@ from .languages.applescript import AppleScript
 from .languages.html import HTML
 from .languages.javascript import JavaScript
 from .languages.powershell import PowerShell
-from .languages.python import Python
+# from .languages.python import Python
 from .languages.r import R
 from .languages.react import React
 from .languages.ruby import Ruby
@@ -17,7 +17,7 @@ class Terminal:
         self.computer = computer
         self.languages = [
             Ruby,
-            Python,
+            # Python,
             Shell,
             JavaScript,
             HTML,
