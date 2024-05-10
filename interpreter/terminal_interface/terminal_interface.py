@@ -88,6 +88,10 @@ def terminal_interface(interpreter, message):
             # This is for the terminal interface being used as a CLI — messages are strings.
             # This won't fire if they're in the python package, display=True, and they passed in an array of messages (for example).
 
+            if message == "":
+                # Ignore empty messages when user presses enter without typing anything
+                continue
+
             if message.startswith("%") and interactive:
                 handle_magic_command(interpreter, message)
                 continue
@@ -102,13 +106,13 @@ def terminal_interface(interpreter, message):
                 )
                 continue
 
-            if interpreter.llm.supports_vision:
+            if interpreter.llm.supports_vision or interpreter.llm.vision_renderer != None:
                 # Is the input a path to an image? Like they just dragged it into the terminal?
                 image_path = find_image_path(message)
 
                 ## If we found an image, add it to the message
                 if image_path:
-                    # Add the text interpreter's messsage history
+                    # Add the text interpreter's message history
                     interpreter.messages.append(
                         {
                             "role": "user",
@@ -432,5 +436,6 @@ def terminal_interface(interpreter, message):
             else:
                 break
         except:
-            system_info(interpreter)
+            if interpreter.debug:
+                system_info(interpreter)
             raise

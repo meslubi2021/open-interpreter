@@ -21,6 +21,31 @@ import time
 import pytest
 from websocket import create_connection
 
+@pytest.mark.skip(reason="Requires open-interpreter[local]")
+def test_m_vision():
+    base64png = "iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAADMElEQVR4nOzVwQnAIBQFQYXff81RUkQCOyDj1YOPnbXWPmeTRef+/3O/OyBjzh3CD95BfqICMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMK0CMO0TAAD//2Anhf4QtqobAAAAAElFTkSuQmCC"
+    messages = [
+        {"role": "user", "type": "message", "content": "describe this image"},
+        {
+            "role": "user",
+            "type": "image",
+            "format": "base64.png",
+            "content": base64png,
+        },
+    ]
+
+    interpreter.llm.supports_vision = False
+    interpreter.llm.model = "gpt-4-turbo"
+    interpreter.llm.supports_functions = True
+    interpreter.llm.context_window = 110000
+    interpreter.llm.max_tokens = 4096
+    interpreter.force_task_completion = True
+
+    interpreter.chat(messages)
+
+    interpreter.force_task_completion = False
+    import time
+    time.sleep(10)
 
 @pytest.mark.skip(reason="Computer with display only + no way to fail test")
 def test_point():
@@ -32,17 +57,20 @@ def test_point():
     interpreter.computer.mouse.move("Spaces:")
     assert False
 
+
 @pytest.mark.skip(reason="Aifs not ready")
 def test_skills():
-
     import sys
+
     if sys.version_info[:2] == (3, 12):
-        print("skills.search is only for python 3.11 for now, because it depends on unstructured. skipping this test.")
+        print(
+            "skills.search is only for python 3.11 for now, because it depends on unstructured. skipping this test."
+        )
         return
 
     import json
 
-    interpreter.model = "gpt-3.5"
+    interpreter.llm.model = "gpt-4-turbo"
 
     messages = ["USER: Hey can you search the web for me?\nAI: Sure!"]
 
@@ -66,13 +94,14 @@ def test_skills():
     print("Files in the path: ")
     for file in os.listdir(interpreter.computer.skills.path):
         print(file)
-    
+
     try:
         skills = interpreter.computer.skills.search(query)
     except ImportError:
         print("Attempting to install unstructured[all-docs]")
         import subprocess
-        subprocess.run(['pip', 'install', 'unstructured[all-docs]'], check=True)
+
+        subprocess.run(["pip", "install", "unstructured[all-docs]"], check=True)
         skills = interpreter.computer.skills.search(query)
 
     lowercase_skills = [skill[0].lower() + skill[1:] for skill in skills]
@@ -295,7 +324,10 @@ def setup_function():
     interpreter.reset()
     interpreter.llm.temperature = 0
     interpreter.auto_run = True
-    interpreter.llm.model = "gpt-4-0125-preview"
+    interpreter.llm.model = "gpt-4-turbo"
+    interpreter.llm.context_window = 123000
+    interpreter.llm.max_tokens = 4096
+    interpreter.llm.supports_functions = True
     interpreter.verbose = False
 
 

@@ -3,13 +3,13 @@
 <p align="center">
     <a href="https://discord.gg/Hvz9Axh84z">
         <img alt="Discord" src="https://img.shields.io/discord/1146610656779440188?logo=discord&style=flat&logoColor=white"/></a>
-    <a href="docs/README_JA.md"><img src="https://img.shields.io/badge/ドキュメント-日本語-white.svg" alt="JA doc"/></a>
-    <a href="docs/README_ZH.md"><img src="https://img.shields.io/badge/文档-中文版-white.svg" alt="ZH doc"/></a>
-    <a href="docs/README_IN.md"><img src="https://img.shields.io/badge/Hindi-white.svg" alt="IN doc"/></a>
-    <img src="https://img.shields.io/static/v1?label=license&message=AGPL&color=white&style=flat" alt="License"/>
+    <a href="https://github.com/OpenInterpreter/open-interpreter/blob/main/docs/README_JA.md"><img src="https://img.shields.io/badge/ドキュメント-日本語-white.svg" alt="JA doc"/></a>
+    <a href="https://github.com/OpenInterpreter/open-interpreter/blob/main/docs/README_ZH.md"><img src="https://img.shields.io/badge/文档-中文版-white.svg" alt="ZH doc"/></a>
+    <a href="https://github.com/OpenInterpreter/open-interpreter/blob/main/docs/README_ES.md"> <img src="https://img.shields.io/badge/Español-white.svg" alt="ES doc"/></a>
+    <a href="https://github.com/OpenInterpreter/open-interpreter/blob/main/docs/README_IN.md"><img src="https://img.shields.io/badge/Hindi-white.svg" alt="IN doc"/></a>
+    <a href="https://github.com/OpenInterpreter/open-interpreter/blob/main/LICENSE"><img src="https://img.shields.io/static/v1?label=license&message=AGPL&color=white&style=flat" alt="License"/></a>
     <br>
     <br>
-    <strong>We launched a new computer (the 01) with Open Interpreter at the center. <a href="https://github.com/OpenInterpreter/01">Star the repo →</a></strong><br>
     <br><a href="https://0ggfznkwh4j.typeform.com/to/G21i9lJ2">Get early access to the desktop app</a>‎ ‎ |‎ ‎ <a href="https://docs.openinterpreter.com/">Documentation</a><br>
 </p>
 
@@ -18,9 +18,9 @@
 ![poster](https://github.com/KillianLucas/open-interpreter/assets/63927363/08f0d493-956b-4d49-982e-67d4b20c4b56)
 
 <br>
-<!--<p align="center">
-<strong>The New Computer Update</strong> introduces <strong><code>--os</code></strong> and a new <strong>Computer API</strong>. <a href="https://changes.openinterpreter.com/log/the-new-computer-update">Read On →</a>
-</p>-->
+<p align="center">
+<strong>The New Computer Update</strong> introduced <strong><code>--os</code></strong> and a new <strong>Computer API</strong>. <a href="https://changes.openinterpreter.com/log/the-new-computer-update">Read On →</a>
+</p>
 <br>
 
 ```shell
@@ -356,7 +356,7 @@ You can run `interpreter -y` or set `interpreter.auto_run = True` to bypass this
 - Watch Open Interpreter like a self-driving car, and be prepared to end the process by closing your terminal.
 - Consider running Open Interpreter in a restricted environment like Google Colab or Replit. These environments are more isolated, reducing the risks of executing arbitrary code.
 
-There is **experimental** support for a [safe mode](docs/SAFE_MODE.md) to help mitigate some risks.
+There is **experimental** support for a [safe mode](https://github.com/OpenInterpreter/open-interpreter/blob/main/docs/SAFE_MODE.md) to help mitigate some risks.
 
 ## How Does it Work?
 
@@ -396,7 +396,7 @@ A new browser window should open. The documentation will be available at [http:/
 
 Thank you for your interest in contributing! We welcome involvement from the community.
 
-Please see our [contributing guidelines](docs/CONTRIBUTING.md) for more details on how to get involved.
+Please see our [contributing guidelines](https://github.com/OpenInterpreter/open-interpreter/blob/main/docs/CONTRIBUTING.md) for more details on how to get involved.
 
 # Roadmap
 

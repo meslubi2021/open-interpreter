@@ -15,6 +15,7 @@ import uuid
 
 import pkg_resources
 from posthog import Posthog
+import requests
 
 posthog = Posthog(
     "phc_6cmXy4MEbLfNGezqGjuUTY8abLu0sAwtGzZFpQW97lc", host="https://app.posthog.com"
@@ -60,3 +61,5 @@ def send_telemetry(event_name, properties=None):
     except:
         # Non blocking
         pass
+
+
