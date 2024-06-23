@@ -14,7 +14,7 @@ If you encounter a bug or have a feature in mind, don't hesitate to [open a new 
 
 ## Philosophy
 
-This is a minimalist, **tighly scoped** project that places a premium on simplicity. We're skeptical of new extensions, integrations, and extra features. We would rather not extend the system if it adds nonessential complexity.
+This is a minimalist, **tightly scoped** project that places a premium on simplicity. We're skeptical of new extensions, integrations, and extra features. We would rather not extend the system if it adds nonessential complexity.
 
 # Contribution Guidelines
 
@@ -28,6 +28,8 @@ This is a minimalist, **tighly scoped** project that places a premium on simplic
 We will review PRs when possible and work with you to integrate your contribution. Please be patient as reviews take time. Once approved, your code will be merged.
 
 ## Running Your Local Fork
+
+**Note: for anyone testing the new `--local`, `--os`, and `--local --os` modes: When you run `poetry install` you aren't installing the optional dependencies and it'll throw errors. To test `--local` mode, run `poetry install -E local`. To test `--os` mode, run `poetry install -E os`. To test `--local --os` mode, run `poetry install -E local -E os`. You can edit the system messages for these modes in `interpreter/terminal_interface/profiles/defaults`.**
 
 Once you've forked the code and created a new branch for your work, you can run the fork in CLI mode by following these steps:
 
