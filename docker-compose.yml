@@ -10,7 +10,7 @@ services:
       # Add other necessary environment variables like API keys here
       # Example: OPENAI_API_KEY: your_openai_api_key
     ports:
-      - "8765:8765"
+      - "8000:8000"
     volumes:
       - .:/app
     networks:
