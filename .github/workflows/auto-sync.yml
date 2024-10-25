@@ -1,0 +1,67 @@
+name: Smart Auto Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at 00:00 UTC every day
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Fetch all history for all branches and tags
+
+      - name: Configure Git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/OpenInterpreter/open-interpreter.git
+
+      - name: Fetch upstream changes
+        run: |
+          git fetch upstream
+
+      - name: Check for conflicts
+        id: check_conflicts
+        run: |
+          git checkout -b temp-sync-branch
+          if git merge-tree $(git merge-base HEAD upstream/main) HEAD upstream/main | grep -e "^<<<<<<<" -e "^>>>>>>>" > /dev/null; then
+            echo "::set-output name=has_conflicts::true"
+          else
+            echo "::set-output name=has_conflicts::false"
+          fi
+          git checkout main
+          git branch -D temp-sync-branch
+
+      - name: Sync changes if no conflicts
+        if: steps.check_conflicts.outputs.has_conflicts == 'false'
+        run: |
+          git merge upstream/main
+          git push origin main
+
+      - name: Create PR if conflicts exist
+        if: steps.check_conflicts.outputs.has_conflicts == 'true'
+        run: |
+          conflict_branch="sync-upstream-$(date +%Y%m%d%H%M%S)"
+          git checkout -b $conflict_branch
+          git merge upstream/main || true
+          git push origin $conflict_branch
+
+      - name: Create Pull Request for conflicts
+        if: steps.check_conflicts.outputs.has_conflicts == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: Sync fork with upstream repository (conflicts detected)
+          body: |
+            This PR is auto-generated to sync changes from the upstream repository.
+            Conflicts were detected during the sync process.
+            Please review the changes, resolve conflicts, and merge if everything looks good.
+          branch: ${{ github.ref }}
+          base: main
