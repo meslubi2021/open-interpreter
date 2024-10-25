@@ -10,7 +10,7 @@ from .languages.html import HTML
 from .languages.java import Java
 from .languages.javascript import JavaScript
 from .languages.powershell import PowerShell
-from .languages.python import Python
+# from .languages.python import Python
 from .languages.r import R
 from .languages.react import React
 from .languages.ruby import Ruby
@@ -35,7 +35,7 @@ class Terminal:
         self.computer = computer
         self.languages = [
             Ruby,
-            Python,
+            # Python,
             Shell,
             JavaScript,
             HTML,
@@ -158,10 +158,11 @@ class Terminal:
             # Get the language. Pass in self.computer *if it takes a single argument*
             # but pass in nothing if not. This makes custom languages easier to add / understand.
             lang_class = self.get_language(language)
-            if lang_class.__init__.__code__.co_argcount > 1:
-                self._active_languages[language] = lang_class(self.computer)
-            else:
-                self._active_languages[language] = lang_class()
+
+            # if lang_class.__init__.__code__.co_argcount > 1:
+            #     self._active_languages[language] = lang_class(self.computer)
+            # else:
+            self._active_languages[language] = lang_class()
         try:
             for chunk in self._active_languages[language].run(code):
                 # self.format_to_recipient can format some messages as having a certain recipient.
